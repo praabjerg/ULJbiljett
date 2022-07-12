@@ -131,14 +131,14 @@ button:active {
   color: white;
 }
 
-#aktiveraqr {
+.smallcontainer {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   margin-bottom: 4vw;
 }
 
-#aktiveraqr > button {
+.singlebutton {
   font-size: 8vw;
   height: 16vw;
   border-radius: 4vw;

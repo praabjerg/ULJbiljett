@@ -40,6 +40,12 @@ $(document).ready(function() {
   const originc = $("#fromselector > .plus");
   const origelt = $("#fromselector > div > .countval");
 
+  const summarylist = $("#summarylist");
+  const swishqr = $("#swishqr");
+
+  // Nästa knapp
+  const nextbtn = $("#next > button");
+
   const priservuxen = [70, 100, 110, 120];
   const priserbarn = [35, 50, 55, 60];
 
@@ -322,7 +328,6 @@ $(document).ready(function() {
   // Klick action för att visa summering + QR
   qrbutton.click(function() {
     // $("#aktiveraqr").hide();
-    const summarylist = $("#summarylist");
     const zoner = numZones();
     const [betalandebarn, pris] = calcPrice(zoner);
     summarylist.children().remove();
@@ -358,9 +363,34 @@ $(document).ready(function() {
     }
 
     summarylist.append("<li>Pris: " + pris + "kr.</li>");
+    summarylist.append("<li>Biljettnr: " + biljettnr + "</li>");
 
     $("#summary").show();
+    const buildimg = '<img src="/swishqr?biljettnr=' + biljettnr + '&pris=' + pris + '" alt="Swish QR"/>';
+    console.log(buildimg);
+    swishqr.children().remove();
+    swishqr.append(buildimg);
+    nextbtn.show();
+
     $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+  });
+
+  nextbtn.click(function() {
+    // Partial reset
+    $("html, body").animate({ scrollTop: 0}, 1000);
+    swishqr.children().remove();
+    summarylist.children().remove();
+    antalvuxna = 1;
+    vuxval.text(antalvuxna);
+    antalbarn = 0;
+    barnval.text(antalbarn);
+    antalrabatt = 0;
+    rabattval.text(antalrabatt);
+    tor = true;
+    biljettnr++;
+    biljettval.text(biljettnr);
+    torbtn.addClass("chosen");
+    enkelbtn.removeClass("chosen");
   });
 
   function setupState() {
@@ -395,6 +425,8 @@ $(document).ready(function() {
 
     // Hide summary
     $("#summary").hide();
+    // Hide next button
+    nextbtn.hide();
     // Kolla upp biljettnr parameter
     if (isNaN(biljettnr)) {
       $("#flow").hide();
