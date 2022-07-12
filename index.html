@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SRJmf Ticket Swish code generator</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="initialize">
+      <h2>Dagens första biljettnr?</h2>
+      <div id="initcontainer">
+        <input id="ticketin" type="text" inputmode="numeric" pattern="\d*" min="0">
+        <button id="startbutton">Start</button>
+      </div>
+    </div>
+    <div id="flow">
+      <div id="topbar">
+        <button id="reset">Reset</button>
+        <button id="direction">⇒ Riktning Uppsala ⇒</button>
+      </div>
+      <div id="biljettnr">
+        <h2>Biljettnr</h2>
+        <div class="counter">
+          <button class="valmod minus">-</button>
+          <div>
+            <span class="countval">0</span>
+          </div>
+          <button class="valmod plus">+</button>
+        </div>
+      </div>
+      <div id="from">
+        <h2>Från</h2>
+        <div id="fromselector">
+          <button class="valmod minus">⇐</button>
+          <div>
+            <span class="countval">Faringe</span>
+          </div>
+          <button class="valmod plus">⇒</button>
+        </div>
+      </div>
+      <div id="to">
+        <h2>Till</h2>
+        <div id="destlist">
+        </div>
+      </div>
+      <div id="enkeltor">
+        <button id="enkel">Enkel</button>
+        <button id="tor" class="chosen">ToR</button>
+      </div>
+      <div id="vuxna">
+        <h2>Vuxna</h2>
+        <div class="counter">
+          <button class="valmod minus">-</button>
+          <div>
+            <span class="countval">1</span>
+          </div>
+          <button class="valmod plus">+</button>
+        </div>
+      </div>
+      <div id="barn">
+        <h2>Barn (7-15 år)</h2>
+        <div class="counter">
+          <button class="valmod minus">-</button>
+          <div>
+            <span class="countval">0</span>
+          </div>
+          <button class="valmod plus">+</button>
+        </div>
+      </div>
+      <div id="rabatter">
+        <h2>Rabatter (≥65 år, UNT)</h2>
+        <div class="counter">
+          <button class="valmod minus">-</button>
+          <div>
+            <span class="countval">0</span>
+          </div>
+          <button class="valmod plus">+</button>
+        </div>
+      </div>
+      <div id="qrkod">
+        <div id="aktiveraqr">
+          <button>Vis Summering + QR</button>
+        </div>
+        <div id="summary">
+          <ul id="summarylist">
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script src="jquery-3.6.0.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

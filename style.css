@@ -1,0 +1,156 @@
+#initialize > h2 {
+  margin-bottom: 3vw;
+}
+
+#initcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#initcontainer > input {
+  font-family: Arial;
+  font-size: 10vw;
+  width: 90%;
+  box-sizing: border-box;
+  border-width: 2px;
+  margin-bottom: 3vw;
+}
+
+#startbutton {
+  font-family: Arial;
+  font-size: 20vw;
+  border-radius: 2vw;
+}
+
+#flow > div:nth-child(even) {
+  background-color: white;
+}
+#flow > div:nth-child(odd) {
+  background-color: #d4d4d4;
+}
+
+#flow > div,#initialize {
+  padding-top: 1vw;
+  padding-bottom: 2vw;
+}
+
+h2 {
+  margin-bottom: 1vw;
+  text-align: center;
+  font-family: Arial;
+  font-size: 8vw;
+}
+
+.chosen {
+  background-color: black;
+  color: white;
+}
+
+#enkeltor {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#enkeltor > button {
+  font-family: Arial;
+  border-radius: 10px;
+  font-size: 10vw;
+}
+
+#destlist {
+  display: flex;
+  flex-direction: column;
+}
+
+#destlist > button {
+  font-family: Arial;
+  font-size: 6vw;
+  border: none;
+  height: 10vw;
+}
+
+#topbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+
+#topbar > button {
+  font-family: Arial;
+  border-radius: 10px;
+  font-size: 6vw;
+}
+
+button {
+  border: solid;
+  background-color: white;
+  border-width: 2px;
+}
+
+#destination {
+  flex-direction: row;
+}
+
+#fromselector {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-family: Arial;
+  font-size: 10vw;
+}
+
+#fromselector > div {
+  width: 60%;
+  text-align: center;
+}
+
+.counter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: 12vw;
+}
+
+.countval {
+  vertical-align: middle;
+}
+
+.valmod {
+  width: 14vw;
+  text-align: center;
+  border-radius: 2vw;
+  font-size: 12vw;
+}
+
+button:active {
+  background-color: black;
+  color: white;
+}
+
+#aktiveraqr {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 4vw;
+}
+
+#aktiveraqr > button {
+  font-size: 8vw;
+  height: 16vw;
+  border-radius: 4vw;
+}
+
+#summary {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#summarylist {
+  font-family: Arial;
+  font-size: 6vw;
+}
