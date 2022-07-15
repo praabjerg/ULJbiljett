@@ -391,6 +391,7 @@ $(document).ready(function() {
     biljettval.text(biljettnr);
     torbtn.addClass("chosen");
     enkelbtn.removeClass("chosen");
+    nextbtn.hide();
   });
 
   function setupState() {
