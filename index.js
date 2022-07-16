@@ -318,6 +318,8 @@ $(document).ready(function() {
     barnval.text(antalbarn);
     antalrabatt = 0;
     rabattval.text(antalrabatt);
+    destination = 6;
+    tobuttons[destination].checked = true;
     tor = true;
     biljettnr++;
     biljettval.text(biljettnr);
