@@ -47,6 +47,68 @@ h2 {
   color: white;
 }
 
+#fromtotitle {
+  display: flex;
+  flex-directio: row;
+  justify-content: space-between;
+}
+
+#fromtotitle > div {
+  width: 18vw;
+  margin-left: 4vw;
+  margin-right: 4vw;
+}
+
+#stoplist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#stoplist > ul > li {
+  height: 11vw;
+}
+
+#fromcheck > li > input,
+#tocheck > li > input {
+  margin: 0;
+  opacity: 0;
+  position: absolute;
+  height: 9.5vw;
+  width: 16vw;
+}
+
+input[type="radio"] + label {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 16vw;
+  height: 9.5vw;
+  background-color: white;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 4vw;
+}
+
+input[type="radio"]:checked + label {
+  background-color: black;
+}
+
+#stationtitles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#stationtitles > li {
+  font-family: Arial;
+  font-size: 8vw;
+  text-align: center;
+}
+
+#stationtitles > li > span {
+  vertical-align: middle;
+}
+
 #enkeltor {
   display: flex;
   flex-direction: row;
@@ -93,19 +155,6 @@ button {
 
 #destination {
   flex-direction: row;
-}
-
-#fromselector {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  font-family: Arial;
-  font-size: 10vw;
-}
-
-#fromselector > div {
-  width: 60%;
-  text-align: center;
 }
 
 .counter {

@@ -23,7 +23,7 @@ class QRServer(BaseHTTPRequestHandler):
                     'format': 'svg',
                     'payee': {
                         'value': '1234880530',
-                        'editable': True
+                        'editable': False
                     },
                     'amount': {
                         'value': pris,

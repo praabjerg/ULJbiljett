@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SRJmf Ticket Swish code generator</title>
+    <link rel="icon" type="image/png" href="langshyttan_icon.png"/>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
   </head>
@@ -18,8 +19,7 @@
     </div>
     <div id="flow">
       <div id="topbar">
-        <button id="reset">Reset</button>
-        <button id="direction">⇒ Riktning Uppsala ⇒</button>
+        <button id="reset">Start nytt biljettblock</button>
       </div>
       <div id="biljettnr">
         <h2>Biljettnr</h2>
@@ -31,19 +31,60 @@
           <button class="valmod plus">+</button>
         </div>
       </div>
-      <div id="from">
-        <h2>Från</h2>
-        <div id="fromselector">
-          <button class="valmod minus">⇐</button>
-          <div>
-            <span class="countval">Faringe</span>
-          </div>
-          <button class="valmod plus">⇒</button>
+      <div id="fromto">
+        <div id="fromtotitle">
+          <div id="fran"><h2>Från</h2></div>
+          <div id="till"><h2>Till</h2></div>
         </div>
-      </div>
-      <div id="to">
-        <h2>Till</h2>
-        <div id="destlist">
+        <div id="stoplist">
+          <ul id="fromcheck">
+            <li><input type="radio" name="from" id="from_uppsala"><label></label></li>
+            <li><input type="radio" name="from" id="from_fyrislund"><label></label></li>
+            <li><input type="radio" name="from" id="from_arsta"><label></label></li>
+            <li><input type="radio" name="from" id="from_skolsta"><label></label></li>
+            <li><input type="radio" name="from" id="from_barby"><label></label></li>
+            <li><input type="radio" name="from" id="from_gunsta"><label></label></li>
+            <li><input type="radio" name="from" id="from_marielund"><label></label></li>
+            <li><input type="radio" name="from" id="from_lovstahagen"><label></label></li>
+            <li><input type="radio" name="from" id="from_selkna"><label></label></li>
+            <li><input type="radio" name="from" id="from_lot"><label></label></li>
+            <li><input type="radio" name="from" id="from_lanna"><label></label></li>
+            <li><input type="radio" name="from" id="from_almunge"><label></label></li>
+            <li><input type="radio" name="from" id="from_moga"><label></label></li>
+            <li><input type="radio" name="from" id="from_faringe"><label></label></li>
+          </ul>
+          <ul id="stationtitles">
+            <li><span>Uppsala Ö</span></li>
+            <li><span>Fyrislund</span></li>
+            <li><span>Årsta</span></li>
+            <li><span>Skölsta</span></li>
+            <li><span>Bärby</span></li>
+            <li><span>Gunsta</span></li>
+            <li><span>Marielund</span></li>
+            <li><span>Lövstahagen</span></li>
+            <li><span>Slä/Fjällnora</span></li>
+            <li><span>Löt</span></li>
+            <li><span>Länna</span></li>
+            <li><span>Almunge</span></li>
+            <li><span>Moga</span></li>
+            <li><span>Faringe</span></li>
+          </ul>
+          <ul id="tocheck">
+            <li><input type="radio" name="to" id="to_uppsala"><label></label></li>
+            <li><input type="radio" name="to" id="to_fyrislund"><label></label></li>
+            <li><input type="radio" name="to" id="to_arsta"><label></label></li>
+            <li><input type="radio" name="to" id="to_skolsta"><label></label></li>
+            <li><input type="radio" name="to" id="to_barby"><label></label></li>
+            <li><input type="radio" name="to" id="to_gunsta"><label></label></li>
+            <li><input type="radio" name="to" id="to_marielund"><label></label></li>
+            <li><input type="radio" name="to" id="to_lovstahagen"><label></label></li>
+            <li><input type="radio" name="to" id="to_selkna"><label></label></li>
+            <li><input type="radio" name="to" id="to_lot"><label></label></li>
+            <li><input type="radio" name="to" id="to_lanna"><label></label></li>
+            <li><input type="radio" name="to" id="to_almunge"><label></label></li>
+            <li><input type="radio" name="to" id="to_moga"><label></label></li>
+            <li><input type="radio" name="to" id="to_faringe"><label></label></li>
+          </ul>
         </div>
       </div>
       <div id="enkeltor">
@@ -82,7 +123,7 @@
       </div>
       <div id="qrkod">
         <div id="aktiveraqr" class="smallcontainer">
-          <button class="singlebutton">Vis Summering + QR</button>
+          <button class="singlebutton">Summering + QR</button>
         </div>
         <div id="summary">
           <ul id="summarylist">

@@ -3,13 +3,12 @@ $(document).ready(function() {
     get: (searchParams, prop) => searchParams.get(prop)
   });
   var biljettnr = parseInt(params.biljettnr);
-  var riktning = params.riktning;
   var antalvuxna = 1;
   var antalbarn = 0;
   var antalrabatt = 0;
   var tor = true;
   var destelts = [];
-  var destination = 0;
+  var destination = 6;
   // Counter elements
   const biljettdec = $("#biljettnr > .counter > .minus");
   const biljettinc = $("#biljettnr > .counter > .plus");
@@ -23,9 +22,8 @@ $(document).ready(function() {
   const rabattdec = $("#rabatter > .counter > .minus");
   const rabattinc = $("#rabatter > .counter > .plus");
   const rabattval = $("#rabatter > .counter > div > .countval");
-  // Reset och riktning
+  // Reset
   const resetbtn = $("#reset");
-  const riktningbtn = $("#direction");
   // Enkel/ToR
   const enkelbtn = $("#enkel");
   const torbtn = $("#tor");
@@ -35,10 +33,6 @@ $(document).ready(function() {
   var origin = parseInt(params.origin);
   // Summering/QR knapp
   const qrbutton = $("#aktiveraqr > button");
-
-  const origdec = $("#fromselector > .minus");
-  const originc = $("#fromselector > .plus");
-  const origelt = $("#fromselector > div > .countval");
 
   const summarylist = $("#summarylist");
   const swishqr = $("#swishqr");
@@ -66,32 +60,43 @@ $(document).ready(function() {
     "Faringe"
   ];
 
-  var clickfuncs = [];
+  const frombuttons = [];
+  const tobuttons = [];
 
-  function setDestination(destnum) {
-    destelts.forEach(function(stopelt) {
-      stopelt.removeClass("chosen");
-    });
-    destelts[destnum].addClass("chosen");
-    destination = destnum;
+  function setUrlState() {
+    var urlParams = "?origin=" + origin;
+    if (!isNaN(biljettnr)) {
+      urlParams += "&biljettnr=" + biljettnr;
+    }
+    window.history.replaceState(null, null, urlParams);
   }
 
+  $("#fromcheck > li > input").each(function(index, elt) {
+    frombuttons.push(elt);
+    elt.addEventListener('change', function() {
+      if (this.checked) {
+        origin = index;
+        setUrlState();
+      }
+    });
+  });
+
+  $("#tocheck > li > input").each(function(index, elt) {
+    tobuttons.push(elt);
+    elt.addEventListener('change', function() {
+      if (this.checked) {
+        destination = index;
+      }
+    });
+  });
+
   function setOrigin(orignum) {
-    console.log("Setting Origin", orignum);
     if (orignum >= 0 && orignum <= 13) {
       origin = orignum;
-      origelt.text(stoplist[orignum]);
     }
 
-    if(riktning === "faringe" &&
-       origin >= destination &&
-       destination !== 13) {
-      setDestination(origin + 1);
-    } else if (riktning === "uppsala" &&
-               origin <= destination &&
-               destination !== 0) {
-      setDestination(origin - 1);
-    }
+    // Check origin box
+    frombuttons[origin].checked = true;
 
     setUrlState();
   }
@@ -141,96 +146,21 @@ $(document).ready(function() {
     }
   }
 
-  function setClickFuncs() {
-    var funccount = 0;
-    destelts.forEach(function(destelt) {
-      destelt.click(clickfuncs[funccount]);
-      funccount++;
-    });
-  }
-
-  function setDestinationList() {
-    destlistdiv.children().remove();
-    var shallowdests = destelts.slice();
-    if(riktning === "uppsala") {
-      shallowdests.reverse();
-      shallowdests.shift();
-      shallowdests.forEach(function(destelt) {
-        destlistdiv.append(destelt);
-      });
-    } else {
-      shallowdests.shift();
-      shallowdests.forEach(function(destelt) {
-        destlistdiv.append(destelt);
-      });
-    }
-    setClickFuncs();
-  }
-
-  function setRiktningUppsala(uppsala) {
-    console.log("Setting", uppsala);
-    if(!uppsala) {
-      riktning = "faringe";
-      riktningbtn.text("⇒ Riktning Faringe ⇒");
-    } else {
-      riktning = "uppsala";
-      riktningbtn.text("⇒ Riktning Uppsala ⇒");
-    }
-    setDestinationList();
-    setUrlState();
-    setDestination(6);
-  }
-
-  function setUrlState() {
-    var urlParams = "?riktning=" + riktning;
-    urlParams += "&origin=" + origin;
-    if (!isNaN(biljettnr)) {
-      urlParams += "&biljettnr=" + biljettnr;
-    }
-    window.history.replaceState(null, null, urlParams);
-  }
-
   function reset() {
-    window.location = window.location.pathname;
+    window.location = window.location.pathname + "?origin=" + origin;
   }
 
   // Klick actions för Reset och Riktning
   resetbtn.click(reset);
 
-  riktningbtn.click(function() {
-    if(riktning === "faringe") {
-      setRiktningUppsala(true);
-    } else {
-      setRiktningUppsala(false);
-    }
-  });
-
   $("#startbutton").click(function() {
     var biljettinput = $("#ticketin").val();
-    console.log(biljettinput);
     biljettnr = parseInt(biljettinput);
     if (!isNaN(biljettnr)) {
       $("#initialize").hide();
       $("#flow").show();
       setUrlState();
       biljettval.text(biljettnr);
-    }
-  });
-
-  // Klick actions för origin
-  originc.click(function() {
-    if(riktning === "faringe") {
-      setOrigin(origin + 1);
-    } else {
-      setOrigin(origin - 1);
-    }
-  });
-
-  origdec.click(function() {
-    if(riktning === "faringe") {
-      setOrigin(origin - 1);
-    } else {
-      setOrigin(origin + 1);
     }
   });
 
@@ -251,12 +181,15 @@ $(document).ready(function() {
   biljettinc.click(function() {
     biljettnr++;
     biljettval.text(biljettnr);
+    setUrlState();
   });
+
   biljettdec.click(function() {
     if (biljettnr > 0) {
       biljettnr--;
     }
     biljettval.text(biljettnr);
+    setUrlState();
   });
 
   vuxinc.click(function() {
@@ -367,7 +300,6 @@ $(document).ready(function() {
 
     $("#summary").show();
     const buildimg = '<img src="/swishqr?biljettnr=' + biljettnr + '&pris=' + pris + '" alt="Swish QR"/>';
-    console.log(buildimg);
     swishqr.children().remove();
     swishqr.append(buildimg);
     nextbtn.show();
@@ -401,28 +333,8 @@ $(document).ready(function() {
       origin = 13;
     }
 
-    // Setup destination elements
-    var setupcount = 0;
-    stoplist.forEach(function(stop) {
-      var newelt = $("<button>" + stop + "</button>");
-      const stopnum = setupcount;
-      console.log(stopnum);
-      clickfuncs.push(function() {
-        setDestination(stopnum);
-        console.log("Destination set to", destination);
-      });
-      destelts.push(newelt);
-      setupcount++;
-    });
-
-    // Kolla upp riktning parameter
-    if (riktning === "faringe") {
-      setRiktningUppsala(false);
-    } else {
-      setRiktningUppsala(true);
-    }
-
     setOrigin(origin);
+    tobuttons[destination].checked = true;
 
     // Hide summary
     $("#summary").hide();
@@ -437,9 +349,6 @@ $(document).ready(function() {
       $("#flow").show();
       biljettval.text(biljettnr);
     }
-
-    // Sätt destinationer
-    setDestinationList();
   }
 
   setupState();
