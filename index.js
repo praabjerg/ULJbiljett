@@ -35,7 +35,9 @@ $(document).ready(function() {
   const qrbutton = $("#aktiveraqr > button");
 
   const summarylist = $("#summarylist");
+  const qrfield = $("#qrfield");
   const swishqr = $("#swishqr");
+  const localqr = $("#localqr");
 
   // Nästa knapp
   const nextbtn = $("#next > button");
@@ -299,9 +301,23 @@ $(document).ready(function() {
     summarylist.append("<li>Biljettnr: " + biljettnr + "</li>");
 
     $("#summary").show();
-    const buildimg = '<img src="/swishqr?biljettnr=' + biljettnr + '&pris=' + pris + '" alt="Swish QR"/>';
+    const qrsize = Math.round(0.8 * window.innerWidth);
+    var qrcode = new QRCode(localqr[0], {
+      width: qrsize,
+      height: qrsize
+    });
+    qrcode.makeCode("C1234880530;" + pris + ";" + biljettnr + ";6");
+    localqr.show();
+    qrfield.show();
+    var qrimage = new Image();
+    qrimage.src = '/swishqr?biljettnr=' + biljettnr + '&pris=' + pris;
+    qrimage.alt = 'Swish QR';
+    qrimage.onload = function() {
+      localqr.hide();
+      swishqr.show();
+    };
     swishqr.children().remove();
-    swishqr.append(buildimg);
+    swishqr.append(qrimage);
     nextbtn.show();
 
     $("html, body").animate({ scrollTop: $(document).height() }, 1000);
@@ -310,7 +326,9 @@ $(document).ready(function() {
   nextbtn.click(function() {
     // Partial reset
     $("html, body").animate({ scrollTop: 0}, 1000);
+    qrfield.hide();
     swishqr.children().remove();
+    swishqr.hide();
     summarylist.children().remove();
     antalvuxna = 1;
     vuxval.text(antalvuxna);
@@ -323,6 +341,7 @@ $(document).ready(function() {
     tor = true;
     biljettnr++;
     biljettval.text(biljettnr);
+    setUrlState();
     torbtn.addClass("chosen");
     enkelbtn.removeClass("chosen");
     nextbtn.hide();
@@ -342,6 +361,10 @@ $(document).ready(function() {
     $("#summary").hide();
     // Hide next button
     nextbtn.hide();
+    // Hide QR elements
+    qrfield.hide();
+    swishqr.hide();
+    localqr.hide();
     // Kolla upp biljettnr parameter
     if (isNaN(biljettnr)) {
       $("#flow").hide();
