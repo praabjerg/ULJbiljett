@@ -263,6 +263,8 @@ $(document).ready(function() {
   // Klick action för att visa summering + QR
   qrbutton.click(function() {
     // $("#aktiveraqr").hide();
+    localqr.hide();
+    swishqr.hide();
     const zoner = numZones();
     const [betalandebarn, pris] = calcPrice(zoner);
     summarylist.children().remove();
@@ -302,6 +304,7 @@ $(document).ready(function() {
 
     $("#summary").show();
     const qrsize = Math.round(0.8 * window.innerWidth);
+    localqr.children().remove();
     var qrcode = new QRCode(localqr[0], {
       width: qrsize,
       height: qrsize
