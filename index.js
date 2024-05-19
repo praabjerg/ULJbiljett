@@ -42,8 +42,8 @@ $(document).ready(function() {
   // Nästa knapp
   const nextbtn = $("#next > button");
 
-  const priservuxen = [70, 100, 110, 120];
-  const priserbarn = [35, 50, 55, 60];
+  const priservuxen = [70, 110, 120, 130];
+  const priserbarn = [35, 55, 60, 65];
 
   const stoplist = [
     "Uppsala Ö",
